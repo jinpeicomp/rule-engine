@@ -1,0 +1,57 @@
+package com.jinpei.re.file
+
+import java.math.BigDecimal
+import com.jinpei.re.common.ReUtils
+import com.jinpei.re.core.model.Activity
+import com.jinpei.re.core.model.UserAttribute
+
+dialect "java"
+
+/**
+* 用户营销规则
+* @author Mingo.Liu
+* @date 2022-09-28
+*/
+
+global java.util.List<Activity> list
+
+//所有国家默认规则，2022年9月30日失效
+rule "所有国家默认"
+    salience 1
+    date-expires "30-Sep-2022"
+    when
+        $attribute:UserAttribute();
+    then
+        Activity activity = new Activity();
+        activity.setName("所有国家默认");
+        activity.setDiscount(BigDecimal.valueOf(0.95));
+        activity.setWeight(1);
+        list.add(activity);
+        ReUtils.printRule("所有国家默认");
+end
+
+rule "巴西默认"
+    salience 10
+    when
+        $attribute:UserAttribute(region == "巴西");
+    then
+        Activity activity = new Activity();
+        activity.setName("巴西默认");
+        activity.setDiscount(BigDecimal.valueOf(0.92));
+        activity.setWeight(10);
+        list.add(activity);
+        ReUtils.printRule("巴西默认");
+end
+
+rule "巴西机顶盒"
+    salience 12
+    when
+        $attribute:UserAttribute(region == "巴西", terminalType == "box");
+    then
+        Activity activity = new Activity();
+        activity.setName("巴西机顶盒");
+        activity.setDiscount(BigDecimal.valueOf(0.93));
+        activity.setWeight(12);
+        list.add(activity);
+        ReUtils.printRule("巴西机顶盒");
+end

@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * 应用入口
+ *
  * @author Mingo.Liu
  * @date 2022-09-28
  */

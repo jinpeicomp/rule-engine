@@ -71,7 +71,7 @@ public class ReUtils {
                                 }
                                 writeMethod.invoke(dest, value);
                             } catch (Throwable ex) {
-                                throw new FatalBeanException( "Could not copy property '" + targetPd.getName() + "' from source to target", ex);
+                                throw new FatalBeanException("Could not copy property '" + targetPd.getName() + "' from source to target", ex);
                             }
                         }
                     }
