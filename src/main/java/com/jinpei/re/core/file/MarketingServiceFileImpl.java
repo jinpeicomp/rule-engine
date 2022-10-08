@@ -4,12 +4,14 @@ import com.jinpei.re.core.MarketingService;
 import com.jinpei.re.core.model.Activity;
 import com.jinpei.re.core.model.UserAttribute;
 import com.jinpei.re.dto.ActivityCreateDTO;
+import com.jinpei.re.dto.ActivitySearchDTO;
 import com.jinpei.re.dto.ActivityUpdateDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.StatelessKieSession;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -73,6 +75,17 @@ public class MarketingServiceFileImpl implements MarketingService {
      */
     @Override
     public Activity update(ActivityUpdateDTO updateDTO) {
+        throw new UnsupportedOperationException("不支持此操作");
+    }
+
+    /**
+     * 查询营销活动
+     *
+     * @param searchDTO 查询请求
+     * @return 分页查询结果
+     */
+    @Override
+    public Page<Activity> queryPage(ActivitySearchDTO searchDTO) {
         throw new UnsupportedOperationException("不支持此操作");
     }
 }

@@ -1,6 +1,9 @@
 package com.jinpei.re.core.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,7 +16,13 @@ import java.util.List;
  * @date 2022-09-29
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Activity implements Serializable {
+    /**
+     * id
+     */
     private Long id;
 
     /**

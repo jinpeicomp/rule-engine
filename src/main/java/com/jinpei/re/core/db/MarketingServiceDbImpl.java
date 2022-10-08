@@ -6,11 +6,13 @@ import com.jinpei.re.core.db.engine.DynamicRuleEngine;
 import com.jinpei.re.core.model.Activity;
 import com.jinpei.re.core.model.UserAttribute;
 import com.jinpei.re.dto.ActivityCreateDTO;
+import com.jinpei.re.dto.ActivitySearchDTO;
 import com.jinpei.re.dto.ActivityUpdateDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -88,5 +90,17 @@ public class MarketingServiceDbImpl implements MarketingService {
         Activity activity = activityService.update(updateDTO);
         dynamicRuleEngine.addOrUpdateRule(activity);
         return activity;
+    }
+
+    /**
+     * 查询营销活动
+     *
+     * @param searchDTO 查询请求
+     * @return 分页查询结果
+     */
+    @Override
+    @Transactional(timeout = 10, rollbackFor = Exception.class)
+    public Page<Activity> queryPage(ActivitySearchDTO searchDTO) {
+        return activityService.queryPage(searchDTO);
     }
 }

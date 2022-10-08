@@ -3,7 +3,9 @@ package com.jinpei.re.core;
 import com.jinpei.re.core.model.Activity;
 import com.jinpei.re.core.model.UserAttribute;
 import com.jinpei.re.dto.ActivityCreateDTO;
+import com.jinpei.re.dto.ActivitySearchDTO;
 import com.jinpei.re.dto.ActivityUpdateDTO;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -44,4 +46,12 @@ public interface MarketingService {
      * @return 更新成功的营销活动
      */
     Activity update(ActivityUpdateDTO updateDTO);
+
+    /**
+     * 查询营销活动
+     *
+     * @param searchDTO 查询请求
+     * @return 分页查询结果
+     */
+    Page<Activity> queryPage(ActivitySearchDTO searchDTO);
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 用户属性
@@ -35,4 +36,9 @@ public class UserAttribute {
      * 渠道类型
      */
     private String channelType;
+
+    public boolean isValid() {
+        return StringUtils.isNotBlank(region) && StringUtils.isNotBlank(terminalType)
+                && null != loginType && StringUtils.isNotBlank(channelType);
+    }
 }
