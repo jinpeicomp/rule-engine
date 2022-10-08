@@ -1,6 +1,9 @@
 package com.jinpei.re.db.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,6 +16,9 @@ import java.util.List;
  * @date 2022-09-29
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ActivityCreateDTO implements Serializable {
     /**
      * 营销规则名称

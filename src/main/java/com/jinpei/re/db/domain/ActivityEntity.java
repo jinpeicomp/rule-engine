@@ -3,10 +3,14 @@ package com.jinpei.re.db.domain;
 import com.jinpei.re.common.ReUtils;
 import com.jinpei.re.model.Activity;
 import lombok.Data;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,7 +33,7 @@ public class ActivityEntity implements Serializable {
     /**
      * 营销规则名称
      */
-    @Column(name = "name", nullable = false, updatable = false, unique = true, columnDefinition = "varchar(64) comment '营销规则名称'")
+    @Column(name = "name", nullable = false, updatable = false, columnDefinition = "varchar(64) comment '营销规则名称'")
     private String name;
 
     /**
@@ -54,8 +58,7 @@ public class ActivityEntity implements Serializable {
      * 渠道类型
      */
     @Column(name = "channel_types", columnDefinition = "text comment '渠道类型'")
-    @ElementCollection(targetClass = String.class)
-    private List<String> channelTypes;
+    private String strChannelTypes;
 
     /**
      * 活动规则权重
@@ -66,8 +69,25 @@ public class ActivityEntity implements Serializable {
     /**
      * 折扣
      */
-    @Column(name = "discount", columnDefinition = "decimal(6,4) not null comment '折扣'")
+    @Column(name = "discount", columnDefinition = "decimal(8,4) not null comment '折扣'")
     private BigDecimal discount = BigDecimal.ONE;
+
+    @Transient
+    public List<String> getChannelTypes() {
+        if (StringUtils.isBlank(strChannelTypes)) {
+            return Collections.emptyList();
+        }
+
+        return Arrays.asList(strChannelTypes.split(","));
+    }
+
+    public void setChannelTypes(List<String> channelTypes) {
+        if (CollectionUtils.isEmpty(channelTypes)) {
+            strChannelTypes = null;
+        } else {
+            strChannelTypes = String.join(",", channelTypes);
+        }
+    }
 
     public Activity toValueObject() {
         return ReUtils.copy(this, new Activity(), true);

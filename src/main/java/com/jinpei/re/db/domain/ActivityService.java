@@ -2,8 +2,8 @@ package com.jinpei.re.db.domain;
 
 import com.jinpei.re.common.ReUtils;
 import com.jinpei.re.db.dto.ActivityCreateDTO;
-import com.jinpei.re.model.Activity;
 import com.jinpei.re.db.dto.ActivitySearchDTO;
+import com.jinpei.re.model.Activity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
