@@ -1,0 +1,24 @@
+package com.jinpei.re.dynamic
+
+import com.jinpei.re.model.UserAttribute
+import com.jinpei.re.model.Activity
+import java.math.BigDecimal
+import com.jinpei.re.common.ReUtils
+
+dialect "java"
+
+/**
+* ${name}-${id}
+* @author Mingo.Liu
+*/
+
+global java.util.List<Long> list
+
+rule "${name}"
+    salience ${weight}
+    when
+        $attribute:UserAttribute(${lhs})
+    then
+        list.add(${id})
+        ReUtils.printRule("${name}-${id}");
+end
