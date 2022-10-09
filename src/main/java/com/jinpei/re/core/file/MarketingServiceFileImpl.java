@@ -3,6 +3,7 @@ package com.jinpei.re.core.file;
 import com.jinpei.re.core.MarketingService;
 import com.jinpei.re.core.model.Activity;
 import com.jinpei.re.core.model.UserAttribute;
+import com.jinpei.re.dto.ActivityAnalyzeResponse;
 import com.jinpei.re.dto.ActivityCreateDTO;
 import com.jinpei.re.dto.ActivitySearchDTO;
 import com.jinpei.re.dto.ActivityUpdateDTO;
@@ -86,6 +87,17 @@ public class MarketingServiceFileImpl implements MarketingService {
      */
     @Override
     public Page<Activity> queryPage(ActivitySearchDTO searchDTO) {
+        throw new UnsupportedOperationException("不支持此操作");
+    }
+
+    /**
+     * 分析待创建的营销活动和已存在的营销活动是否冲突
+     *
+     * @param createDTO 待创建的营销活动
+     * @return 冲突分析结果
+     */
+    @Override
+    public ActivityAnalyzeResponse analyze(ActivityCreateDTO createDTO) {
         throw new UnsupportedOperationException("不支持此操作");
     }
 }

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 营销配置服务接口
@@ -141,6 +142,21 @@ public class ActivityService {
         return activityRepository.findAll(specification, Sort.by(Sort.Order.desc("weight"), Sort.Order.desc("id")))
                 .stream()
                 .map(ActivityEntity::toValueObject)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 查询地区下所有channel type
+     *
+     * @param region 地区
+     * @return channel type列表
+     */
+    public List<String> queryChannelType(String region) {
+        return activityRepository.findChannelTypes(region)
+                .stream()
+                .filter(StringUtils::isNoneBlank)
+                .flatMap(str -> Stream.of(str.split(",")))
+                .distinct()
                 .collect(Collectors.toList());
     }
 }

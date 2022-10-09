@@ -2,6 +2,8 @@ package com.jinpei.re.common;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.core.ResolvableType;
 import org.springframework.util.Assert;
@@ -9,6 +11,8 @@ import org.springframework.util.Assert;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.beans.BeanUtils.getPropertyDescriptor;
 import static org.springframework.beans.BeanUtils.getPropertyDescriptors;
@@ -80,5 +84,25 @@ public class ReUtils {
         }
 
         return dest;
+    }
+
+    /**
+     * 根据字符串非空创建optional
+     *
+     * @param value 字符串
+     * @return optional
+     */
+    public static Optional<String> ofStringBlank(String value) {
+        return StringUtils.isBlank(value) ? Optional.empty() : Optional.of(value);
+    }
+
+    /**
+     * 根据集合非空创建optional
+     *
+     * @param value 集合
+     * @return optional
+     */
+    public static <T> Optional<List<T>> ofListEmpty(List<T> value) {
+        return CollectionUtils.isEmpty(value) ? Optional.empty() : Optional.of(value);
     }
 }

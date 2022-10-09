@@ -2,6 +2,7 @@ package com.jinpei.re.core;
 
 import com.jinpei.re.core.model.Activity;
 import com.jinpei.re.core.model.UserAttribute;
+import com.jinpei.re.dto.ActivityAnalyzeResponse;
 import com.jinpei.re.dto.ActivityCreateDTO;
 import com.jinpei.re.dto.ActivitySearchDTO;
 import com.jinpei.re.dto.ActivityUpdateDTO;
@@ -54,4 +55,12 @@ public interface MarketingService {
      * @return 分页查询结果
      */
     Page<Activity> queryPage(ActivitySearchDTO searchDTO);
+
+    /**
+     * 分析待创建的营销活动和已存在的营销活动是否冲突
+     *
+     * @param createDTO 待创建的营销活动
+     * @return 冲突分析结果
+     */
+    ActivityAnalyzeResponse analyze(ActivityCreateDTO createDTO);
 }

@@ -3,10 +3,7 @@ package com.jinpei.re.api;
 import com.jinpei.re.core.MarketingService;
 import com.jinpei.re.core.model.Activity;
 import com.jinpei.re.core.model.UserAttribute;
-import com.jinpei.re.dto.ActivityCreateDTO;
-import com.jinpei.re.dto.ActivitySearchDTO;
-import com.jinpei.re.dto.ActivityUpdateDTO;
-import com.jinpei.re.dto.BaseResponse;
+import com.jinpei.re.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -40,6 +37,18 @@ public class MarketingController {
         }
         List<Activity> activities = marketingService.calculate(userAttribute);
         return BaseResponse.success(activities);
+    }
+
+    /**
+     * 分析待创建的营销活动和已存在的营销活动是否冲突
+     *
+     * @param createDTO 待创建的营销活动
+     * @return 冲突分析结果
+     */
+    @RequestMapping(path = "/analyze", method = RequestMethod.POST)
+    public BaseResponse<ActivityAnalyzeResponse> analyze(@RequestBody ActivityCreateDTO createDTO) {
+        ActivityAnalyzeResponse result = marketingService.analyze(createDTO);
+        return BaseResponse.success(result);
     }
 
     /**
