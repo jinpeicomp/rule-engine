@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rule-engine-deploy
+  namespace: insight
+  labels:
+    app: rule-engine
+spec:
+  selector:
+    matchLabels:
+      app: rule-engine
+  template:
+    metadata:
+      labels:
+        app: rule-engine
+    spec:
+      containers:
+        - name: insight
+          image: demo/rule-engine:1.0.0-SNAPSHOT
+          resources:
+            limits:
+              memory: "3200Mi"
+              cpu: "3000m"
+            requests:
+              memory: "3200Mi"
+              cpu: "3000m"
+          ports:
+            - containerPort: 8080
+              name: srv-port
+            - containerPort: 9001
+              name: manage-port
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-Dspring.config.location=/var/app/application.properties -Dlogging.path=/var/app/logs
+              -XX:MetaspaceSize=256M -XX:MaxMetaspaceSize=256M -XX:ReservedCodeCacheSize=100M -Xms2g -Xmx2g"
+          volumeMounts:
+            - name: var-rule-engine
+              mountPath: /var/app
+      volumes:
+        - name: var-rule-engine
+          hostPath:
+            path: /Users/liuzhaoming/software/run/rule-engine/k8s
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rule-engine
+  namespace: insight
+spec:
+  selector:
+    app: rule-engine
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: srv-port
+      name: svc-srv-port
+      protocol: TCP
+      nodePort: 31258
+    - port: 9001
+      targetPort: manage-port
+      name: svs-manage-port
+      protocol: TCP
+      nodePort: 31288
