@@ -1,6 +1,5 @@
 package com.jinpei.re.core.db.domain;
 
-import com.jinpei.re.core.db.domain.ActivityService;
 import com.jinpei.re.core.model.Activity;
 import com.jinpei.re.dto.ActivityCreateDTO;
 import org.junit.Test;

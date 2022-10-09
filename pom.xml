@@ -66,4 +66,29 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.7.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <image>
+                        <name>demo/${project.artifactId}:${project.version}</name>
+                        <env>
+                            <HTTP_PROXY>http://docker.for.mac.host.internal:1087</HTTP_PROXY>
+                            <HTTPS_PROXY>http://docker.for.mac.host.internal:1087</HTTPS_PROXY>
+                        </env>
+                    </image>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

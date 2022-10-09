@@ -19,5 +19,5 @@ rule "${name}"
         UserAttribute(${lhs});
     then
         list.add(${id});
-        ReUtils.printRule("${name}-${id}");
+//        ReUtils.printRule("${name}-${id}");
 end
